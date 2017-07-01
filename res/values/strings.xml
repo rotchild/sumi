@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">积分加油系统</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="login">登录</string>
+    <string name="login_title">欢迎使用</string>
+    <string name="cash">收银</string>
+    <string name="order">订单管理</string>
+    <string name="allOrder">全部订单(0)</string>
+    <string name="fuelOrder">加油订单(0)</string>
+    <string name="shopOrder">购物订单(0)</string>
+    <string name="myOrderTitle">我的订单</string>
+    <string name="fuelservice">加油服务</string>
+    <string name="myServiceTitle">我的服务</string>
+    <string name="back">返回</string>
+    <string name="fuelcardnumber">加油卡卡号</string>
+    <string name="fuelcardremain">加油卡余额</string>
+    <string name="cashier">收银员</string>
+    <string name="themoneyforpay">本次消费应收金额(元)</string>
+    <string name="themoneyrealpay">本次消费实收金额：</string>
+    <string name="checkandpay">确认并付款</string>
+    <string name="check">确认</string>
+    <string name="validperiodshow">有效期:</string>
+    <string name="paysuccess">交易成功</string>
+    <string name="payfail">交易失败</string>
+    <string name="ipset">设置</string>
+    <string name="passwordset">修改密码</string>
+    <string name="ipsethint">*ip地址格式为192.168.1.119</string>
+    
+    <string name="str_printer_state">状态</string>
+    <string name="str_printer_printing">正在打印</string>
+    <string name="str_printer_lowpower">低电压</string>
+    <string name="str_printer_nopaper">缺纸</string>
+    <string name="str_printer_bufferfull">缓冲区满</string>
+    <string name="str_printer_buffernull">缓冲区空</string>
+    <string name="str_printer_hightemperature">温度过高</string>
+    
+    <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+</resources>

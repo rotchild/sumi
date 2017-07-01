@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/for_include"
+        >
+       <com.cx.sumicashersystem.mwidget.MOrderTitle
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+</com.cx.sumicashersystem.mwidget.MOrderTitle>
+    </LinearLayout>
+  
+<LinearLayout
+    android:layout_below="@id/for_include"
+    android:id="@+id/subTitleLinear"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:orientation="horizontal"
+    >
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    >
+    <LinearLayout
+        android:layout_width="3dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+     
+    </LinearLayout>
+     <LinearLayout
+        android:layout_width="3dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/ordertype_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="加油订单"
+            android:textSize="@dimen/mordertitle_small_size"
+            android:textColor="@color/default_text_color"
+            />
+    </LinearLayout>
+     <LinearLayout
+        android:layout_width="3dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+       
+    </LinearLayout>
+</LinearLayout>
+</LinearLayout>
+<ScrollView
+    android:id="@+id/order_scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@id/subTitleLinear"
+    android:fadeScrollbars="true"
+    >
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="vertical"
+     >
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_margin="10dp"
+       >
+   <TextView
+       android:layout_alignParentLeft="true"
+       android:layout_width="wrap_content"
+       android:layout_height="@dimen/orderinforsectionh"
+       style="@style/orderInforleft"
+       android:text="订单号:"
+       />
+   <TextView
+       android:id="@+id/ordernoid"
+       android:layout_alignParentRight="true"
+       android:layout_width="wrap_content"
+       android:layout_height="@dimen/orderinforsectionh"
+       style="@style/orderInforright"
+       android:text=""
+       />       
+   </RelativeLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="@color/linegray"
+       >
+       
+   </LinearLayout>
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_margin="10dp"
+       >
+    <TextView
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/orderinforsectionh"
+        style="@style/orderInforleft"
+        android:text="创建时间："
+        />
+    <TextView
+       android:id="@+id/createtimeid"
+       android:layout_alignParentRight="true"
+       android:layout_width="wrap_content"
+       android:layout_height="@dimen/orderinforsectionh"
+       style="@style/orderInforright"
+       android:text=""
+       />       
+   </RelativeLayout>
+   
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="@color/linegray"
+       >
+       
+   </LinearLayout>
+   
+      <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_margin="10dp"
+       >
+    <TextView
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/orderinforsectionh"
+        style="@style/orderInforleft"
+        android:text="加油金额："
+        />
+    <TextView
+       android:id="@+id/amountid"
+       android:layout_alignParentRight="true"
+       android:layout_width="wrap_content"
+       android:layout_height="@dimen/orderinforsectionh"
+       style="@style/orderInforright"
+       android:text="280.00"
+       />       
+   </RelativeLayout>
+   
+      <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="@color/linegray"
+       >
+       
+   </LinearLayout>
+      
+      <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_margin="10dp"
+       >
+    <TextView
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/orderinforsectionh"
+        style="@style/orderInforleft"
+        android:text="支付方式："
+        />
+    <TextView
+       android:id="@+id/paymentid"
+       android:layout_alignParentRight="true"
+       android:layout_width="wrap_content"
+       android:layout_height="@dimen/orderinforsectionh"
+       style="@style/orderInforright"
+       android:text=""
+       />       
+   </RelativeLayout>
+   
+      <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="@color/linegray"
+       >
+       
+   </LinearLayout>
+      
+      <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_margin="10dp"
+       >
+    <TextView
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/orderinforsectionh"
+        style="@style/orderInforleft"
+        android:text="会员积分："
+        />
+    <TextView
+       android:id="@+id/memberpointsid"
+       android:layout_alignParentRight="true"
+       android:layout_width="wrap_content"
+       android:layout_height="@dimen/orderinforsectionh"
+       style="@style/orderInforright"
+       android:text="600分(-60.00)"
+       />       
+   </RelativeLayout>
+   
+      <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="@color/linegray"
+       >
+       
+   </LinearLayout>
+      
+      <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_margin="10dp"
+       >
+    <TextView
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/orderinforsectionh"
+        style="@style/orderInforleft"
+        android:text="代金券："
+        />
+    <TextView
+       android:id="@+id/vouchersvalueid"
+       android:layout_alignParentRight="true"
+       android:layout_width="wrap_content"
+       android:layout_height="@dimen/orderinforsectionh"
+       style="@style/orderInforright"
+       android:text="-2.00"
+       />       
+   </RelativeLayout>
+   
+      <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="@color/linegray"
+       >
+       
+   </LinearLayout>
+      
+      <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_margin="10dp"
+       >
+    <TextView
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/orderinforsectionh"
+        style="@style/orderInforleft"
+        android:text="实付金额："
+        />
+    <TextView
+       android:id="@+id/realpayid"
+       android:layout_alignParentRight="true"
+       android:layout_width="wrap_content"
+       android:layout_height="@dimen/orderinforsectionh"
+       style="@style/orderInforright"
+       android:text="218.00"
+       />       
+   </RelativeLayout>
+   
+      <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="@color/linegray"
+       >
+       
+   </LinearLayout>
+      
+      <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_margin="10dp"
+       >
+    <TextView
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/orderinforsectionh"
+        style="@style/orderInforleft"
+        android:text="收银员："
+        />
+    <TextView
+       android:id="@+id/cashierid"
+       android:layout_alignParentRight="true"
+       android:layout_width="wrap_content"
+       android:layout_height="@dimen/orderinforsectionh"
+       style="@style/orderInforright"
+       android:text="刘嘉琦"
+       />       
+   </RelativeLayout>  
+ </LinearLayout>   
+</ScrollView>
+</RelativeLayout>

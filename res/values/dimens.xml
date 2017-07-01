@@ -1,0 +1,21 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="default_edittext_height">40dp</dimen>
+    <dimen name="login_title_height">60dp</dimen>
+    <dimen name="cash_btn_height">80dp</dimen>
+    <dimen name="default_size">10dip</dimen>
+    <dimen name="middle_size">28dip</dimen>
+    <dimen name="title_size">40dip</dimen>
+    <dimen name="mordertitle_size">20dip</dimen>
+    <dimen name="mordertitle_small_size">15dip</dimen>
+    <dimen name="moneypay">15dip</dimen>
+    <dimen name="customerinfo">13dip</dimen>
+    <dimen name="moneyshow">60dip</dimen>
+    <dimen name="orderinforsectionh">20dp</dimen>
+    <dimen name="resultInfo">14dp</dimen>
+     <dimen name="resultInfoItemHeight">27dp</dimen>
+     <dimen name="ipsetwidth">35dp</dimen>
+</resources>

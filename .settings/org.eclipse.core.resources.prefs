@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//gen/woyou/aidlservice/jiuiv5/ICallback.java=UTF-8
+encoding//gen/woyou/aidlservice/jiuiv5/IWoyouService.java=UTF-8
+encoding//src/com/cx/sumicashersystem/myservice/FuelPay.java=UTF-8
+encoding//src/com/cx/sumicashersystem/myservice/MipcaActivityCapture.java=UTF-8
+encoding//src/com/cx/sumicashersystem/myservice/ScanPayCodeMipcaActivityCapture.java=UTF-8
+encoding//src/com/cx/sumicashersystem/myservice/ScannerPayCodeRealActivity.java=UTF-8
+encoding//src/com/cx/sumicashersystem/myservice/ZBarScannerActivity.java=UTF-8
+encoding//src/woyou/aidlservice/jiuiv5/ICallback.aidl=UTF-8
+encoding//src/woyou/aidlservice/jiuiv5/IWoyouService.aidl=UTF-8

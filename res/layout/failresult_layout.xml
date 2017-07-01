@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+  <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="50dp"
+     android:orientation="horizontal"
+     android:background="@drawable/myorderback"
+     
+     >
+   <LinearLayout
+    android:layout_width="3dp"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_weight="1"
+    >   
+</LinearLayout>
+<LinearLayout
+    android:layout_width="3dp"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_weight="1"
+    >
+   <TextView
+       android:layout_margin="10dp"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:text="@string/fuelservice"
+       android:textSize="@dimen/mordertitle_size"
+       android:textColor="@color/white"
+       android:gravity="center"
+       /> 
+</LinearLayout>
+<LinearLayout
+    android:layout_width="3dp"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_weight="1"
+    >
+ 
+</LinearLayout>      
+ </LinearLayout>    
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="3dp"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/order_background"
+    >
+ <RelativeLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:background="@color/white"
+     >
+    <ImageView
+        android:id="@+id/fail_icon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/payfail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        />
+    <TextView
+      android:id="@+id/pay_fail_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/fail_icon"
+      android:text="@string/payfail"
+      android:textSize="15dp"
+      android:textColor="@color/black"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="5dp"
+      android:padding="5dp"
+      />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提示客户重新支付或更换支付方式"
+        android:textSize="13dp"
+        android:textColor="#0065A3"
+        android:layout_below="@id/pay_fail_tv"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="5dp"
+        />   
+ </RelativeLayout>
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="vertical"
+     android:layout_alignParentBottom="true"
+     android:layout_marginBottom="20dp"
+     >
+  <Button
+      android:id="@+id/rescan_bt"
+      android:layout_width="match_parent"
+      android:layout_height="35dp"
+      android:layout_margin="5dp"
+      android:text="再次扫描"
+      android:textSize="15dp"
+      android:textColor="@color/white"
+      android:background="@drawable/bulebuttonbackground"
+      
+      />
+   <Button
+      android:id="@+id/payfail_back_bt"
+      android:layout_width="match_parent"
+      android:layout_height="35dp"
+      android:layout_margin="5dp"
+      android:text="返回"
+      android:textSize="15dp"
+      android:textColor="@color/white"
+      android:background="@drawable/bulebuttonbackground"
+      
+      />      
+ </LinearLayout>   
+</RelativeLayout>  
+</LinearLayout>
+</LinearLayout>

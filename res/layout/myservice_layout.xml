@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+     android:background="@drawable/myorderback"
+    android:orientation="horizontal" 
+    >
+ <LinearLayout
+     android:layout_width="3dp"
+     android:layout_height="match_parent"
+     android:orientation="horizontal"
+     android:layout_weight="1"
+     >
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+   <ImageView
+       android:layout_width="wrap_content"
+       android:layout_height="match_parent"
+       android:paddingLeft="3dp"
+       android:src="@drawable/backico"
+       />  
+ <TextView
+     android:id="@+id/service_back_tv"
+     android:layout_width="wrap_content"
+     android:layout_height="match_parent"
+     android:text="@string/back"
+     style="@style/back_tv"
+     android:clickable="true"
+     />  
+</RelativeLayout>     
+ </LinearLayout>
+  <LinearLayout
+     android:layout_width="3dp"
+     android:layout_height="match_parent"
+     android:orientation="horizontal"
+     android:layout_weight="1"
+     >
+    <TextView
+       android:layout_margin="10dp"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:text="@string/myServiceTitle"
+       android:textSize="@dimen/mordertitle_size"
+       android:textColor="@color/white"
+       android:gravity="center"
+       />   
+ </LinearLayout>  
+  <LinearLayout
+     android:layout_width="3dp"
+     android:layout_height="match_parent"
+     android:orientation="horizontal"
+     android:layout_weight="1"
+     >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+ <LinearLayout
+     android:id="@+id/menuLinear"
+     android:layout_width="wrap_content"
+     android:layout_height="match_parent"
+     android:orientation="horizontal"
+     android:layout_alignParentRight="true"
+     android:clickable="true"
+     >
+            <ImageView
+       android:id="@+id/myservice_menu_tv"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center_vertical"
+       android:src="@drawable/menu"
+       style="@style/menu_tv"
+       android:clickable="false"
+       />  
+ </LinearLayout>
+  
+    </RelativeLayout>
+   
+ </LinearLayout>     
+</LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    >
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="@dimen/orderinforsectionh"
+      android:layout_alignParentLeft="true"
+      android:text="@string/fuelcardnumber"
+      style="@style/orderInforleft"
+      />
+  <TextView
+      android:id="@+id/cardnumber_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="@dimen/orderinforsectionh"
+      android:layout_alignParentRight="true"
+      android:text=""
+      style="@style/orderInforright"
+      />    
+</RelativeLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/order_background"
+    >
+</LinearLayout>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    >
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="@dimen/orderinforsectionh"
+      android:layout_alignParentLeft="true"
+      android:text="@string/fuelcardremain"
+      style="@style/orderInforleft"
+      />
+  <TextView
+      android:id="@+id/amount_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="@dimen/orderinforsectionh"
+      android:layout_alignParentRight="true"
+      android:text=""
+      style="@style/orderInforright"
+      />    
+</RelativeLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/order_background"
+    >
+</LinearLayout>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    >
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="@dimen/orderinforsectionh"
+      android:layout_alignParentLeft="true"
+      android:text="@string/cashier"
+      style="@style/orderInforleft"
+      />
+  <TextView
+      android:id="@+id/cashiername_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="@dimen/orderinforsectionh"
+      android:layout_alignParentRight="true"
+      android:text=""
+      style="@style/orderInforright"
+      />    
+</RelativeLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/order_background"
+    >
+</LinearLayout>
+</LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+ <RelativeLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_margin="20dp"
+     >
+   <ImageView
+       android:id="@+id/fuelservice_iv"
+       android:layout_width="130dp"
+       android:layout_height="130dp"
+       android:scaleType="centerInside"
+       android:layout_alignParentLeft="true"
+       android:clickable="true"
+       android:src="@drawable/fuelicon"
+       />
+    <ImageView
+       android:id="@+id/shopservice_iv"
+       android:layout_width="130dp"
+       android:layout_height="130dp"
+       android:scaleType="centerInside"
+       android:layout_alignParentRight="true"
+       android:clickable="true"
+       android:src="@drawable/shopicon"
+       />    
+ </RelativeLayout>   
+</LinearLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_weight="1"
+    >
+ <Button
+     android:layout_margin="10dp"
+     android:id="@+id/myservice_queryamount_btn"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:text="余额查询"
+     android:layout_alignParentBottom="true"
+     android:paddingTop="2dp"
+     android:paddingBottom="2dp"
+     android:textSize="@dimen/mordertitle_small_size"
+     android:textColor="@color/orderinfor_text"
+     android:background="@drawable/graybtnbackground"
+     >
+     
+ </Button>   
+</RelativeLayout>
+</LinearLayout>

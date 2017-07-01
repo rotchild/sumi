@@ -1,0 +1,99 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+<style name="username_edittext">
+    <item name="android:textSize">@dimen/default_size</item>
+    <item name="android:background">@drawable/default_edittext_shape</item>
+    <item name="android:minHeight">50dip</item>
+    <item name="android:paddingTop">3dip</item>
+    <item name="android:paddingBottom">3dip</item>
+    <item name="android:paddingLeft">50dip</item>
+    <item name="android:paddingRight">5dip</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:maxLength">29</item>
+    <item name="android:gravity">center_vertical</item>
+</style>
+<style name="password_edittext">
+    <item name="android:textSize">@dimen/default_size</item>
+    <item name="android:background">@drawable/default_edittext_shape</item>
+    <item name="android:minHeight">50dip</item>
+    <item name="android:paddingTop">3dip</item>
+    <item name="android:paddingBottom">3dip</item>
+    <item name="android:paddingLeft">50dip</item>
+    <item name="android:paddingRight">5dip</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:maxLength">29</item>
+    <item name="android:inputType">textPassword</item>
+    <item name="android:gravity">center_vertical</item>
+</style>
+<style name="login_button">
+    <item name="android:textColor">@color/button_text</item>
+    <item name="android:textSize">@dimen/default_size</item>
+    <item name="android:gravity">center</item>
+    <item name="android:background">@drawable/login_btn_background</item>
+</style>
+<style name="login_title">
+    <item name="android:textColor">@color/defalut_edit_normal</item>
+    <item name="android:textSize">@dimen/title_size</item>
+    <item name="android:gravity">center</item>
+</style>
+<style name="cash_button">
+    <item name="android:textColor">@color/white</item>
+    <item name="android:textSize">@dimen/middle_size</item>
+    <item name="android:gravity">center</item>
+    <item name="android:background">@drawable/cash_button_shape</item>
+</style>
+<style name="back_tv">
+    <item name="android:textColor">@color/white</item>
+    <item name="android:textSize">@dimen/mordertitle_small_size</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:paddingLeft">25dp</item>
+    <item name="android:paddingRight">5dp</item>
+    
+</style>
+<style name="menu_tv">
+    <item name="android:textColor">@color/white</item>
+    <item name="android:textSize">@dimen/mordertitle_small_size</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:paddingLeft">5dp</item>
+    <item name="android:paddingRight">5dp</item>
+    
+</style>
+<style name="orderInforleft">
+    <item name="android:textColor">@color/orderinfor_text</item>
+    <item name="android:textSize">@dimen/mordertitle_small_size</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:paddingLeft">10dp</item>
+</style>
+<style name="orderInforright">
+    <item name="android:textColor">@color/orderinfor_text</item>
+    <item name="android:textSize">@dimen/mordertitle_small_size</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:paddingRight">10dp</item>
+</style>
+<style name="popupwindowanim">
+    <item name="android:windowEnterAnimation">@anim/in</item>
+     <item name="android:windowExitAnimation">@anim/out</item>
+</style>
+     <style name="Dialog" parent="android:style/Theme.Dialog">
+       
+       <item name="android:windowNoTitle">true</item>
+       <item name="android:windowIsFloating">true</item>
+    </style>
+
+</resources>

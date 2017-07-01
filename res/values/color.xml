@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <color name="defalut_edit_normal">#d4d4d4</color>  
+   <color name="button_text">#6B6B6B</color>
+   <color name="default_text_color">#333333</color>
+   <color name="fuel_color">#FF9933</color>
+   <color name="order_background">#E4E4E4</color>
+   <color name="orderinfor_text">#5E5E5E</color>
+   <color name="myellow">#FBED0A</color>
+   <color name="voucheyellow">#DBBB39</color>
+   <color name="mdarkgray">#333333</color>
+   <color name="buttonbule">#0061A0</color>
+    <color name="breaks">#000000</color>
+    <color name="linegray">#BCBCBC</color>
+    <color name="result_view">#b0000000</color>
+      <color name="viewfinder_mask">#60000000</color>
+      <color name="possible_result_points">#c0ffff00</color> 
+      <color name="huise">#999999</color>
+      <color name="darkhuise">#666666</color>
+       <color name="lighthuise">#C9C9C9</color>
+      <color name="fuelorder_background">#f6f6f6</color>
+</resources>

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="50dp"
+     android:orientation="horizontal"
+     android:background="@drawable/myorderback"
+     >
+   <LinearLayout
+    android:layout_width="3dp"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_weight="1"
+    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+ <TextView
+     android:id="@+id/exit_tv_setip"
+     android:layout_width="wrap_content"
+     android:layout_height="match_parent"
+     android:text="退出"
+     style="@style/back_tv"
+     android:clickable="true"
+     />  
+</RelativeLayout>    
+</LinearLayout>
+<LinearLayout
+    android:layout_width="3dp"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_weight="1"
+    >
+   <TextView
+       android:layout_margin="10dp"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:text="@string/ipset"
+       android:textSize="@dimen/mordertitle_size"
+       android:textColor="@color/white"
+       android:gravity="center"
+       /> 
+</LinearLayout>
+<LinearLayout
+    android:layout_width="3dp"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_weight="1"
+    >
+   <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+  
+</RelativeLayout>  
+</LinearLayout>      
+ </LinearLayout>     
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="3dp"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:background="@color/order_background"
+    >
+ <RelativeLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:background="@color/white"
+     >
+    <TextView
+      android:id="@+id/ip_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="50dp"
+      android:text="服务器IP设置:"
+      android:textSize="18dp"
+      android:textColor="@color/black"
+      android:gravity="center_vertical"
+      android:paddingLeft="10dp"
+      />
+    <EditText
+        android:id="@+id/ipinput_et1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="60dp"
+        android:background="@null"
+        
+        android:textSize="15dp"
+        android:singleLine="true"
+        
+        android:gravity="center"
+        />
+<!-- 
+    <TextView
+        android:id="@+id/ipinput_dot1"
+        android:layout_width="5dp"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@id/ipinput_et1"
+        android:text="."
+        android:textSize="30dp"
+        
+        />
+     <EditText
+        android:id="@+id/ipinput_et2"
+        android:layout_width="@dimen/ipsetwidth"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@id/ipinput_dot1"
+        android:background="@null"
+        
+        android:textSize="15dp"
+        android:singleLine="true"
+       
+        android:gravity="center"
+        
+        />
+    <TextView
+        android:id="@+id/ipinput_dot2"
+        android:layout_width="5dp"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@id/ipinput_et2"
+        android:text="."
+        android:textSize="30dp"
+       
+        />
+     <EditText
+        android:id="@+id/ipinput_et3"
+        android:layout_width="@dimen/ipsetwidth"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@id/ipinput_dot2"
+        android:background="@null"
+       
+        android:textSize="15dp"
+        android:singleLine="true"
+        
+        android:gravity="center"
+        />
+
+ -->
+   <!--   <TextView
+        android:id="@+id/ipinput_dot3"
+        android:layout_width="5dp"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@id/ipinput_et3"
+        android:text="."
+        android:textSize="30dp"
+        
+        />
+        -->
+  <!--   <EditText
+        android:id="@+id/ipinput_et4"
+        android:layout_width="@dimen/ipsetwidth"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@id/ipinput_dot3"
+        android:background="@null"
+     
+        android:textSize="15dp"
+        android:singleLine="true"
+       
+       android:gravity="center"
+        />
+     -->
+  <!--<EditText
+      android:id="@+id/ipinput_et"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:paddingLeft="120dp"
+      android:paddingTop="10dp"
+      android:paddingBottom="10dp"
+      android:paddingRight="10dp"
+      android:textSize="15dp"
+      android:textColor="@color/black"
+      android:background="@null"
+      android:gravity="center_vertical"
+      android:digits="0123456789."
+      android:singleLine="true"
+      android:maxLength="18"
+      />
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="50dp"
+      android:text="服务器IP设置:"
+      android:textSize="18dp"
+      android:textColor="@color/black"
+      android:gravity="center_vertical"
+      android:paddingLeft="10dp"
+      /> 
+  -->
+ </RelativeLayout>
+  <RelativeLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:background="@color/white"
+     >
+  <EditText
+      android:id="@+id/portinput_et"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:paddingLeft="120dp"
+      android:paddingTop="10dp"
+      android:paddingBottom="10dp"
+      android:paddingRight="10dp"
+      android:textSize="15dp"
+      android:textColor="@color/black"
+      android:background="@null"
+      android:gravity="center_vertical"
+      android:inputType="number"
+      android:singleLine="true"
+      android:maxLength="18"
+      />
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="50dp"
+      android:text="端口设置:"
+      android:textSize="18dp"
+      android:textColor="@color/black"
+      android:gravity="center_vertical"
+      android:paddingLeft="10dp"
+      />   
+ </RelativeLayout>
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal"
+     >
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="@string/ipsethint"
+       android:textSize="15dp"
+       android:textColor="@color/red"
+       android:layout_marginLeft="5dp"
+       android:layout_marginTop="10dp"
+       android:layout_marginBottom="5dp"
+       />   
+ </LinearLayout>
+  <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal"
+     >
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="端口值为 0~65535"
+       android:textSize="15dp"
+       android:textColor="@color/red"
+       android:layout_marginLeft="5dp"
+       android:layout_marginTop="10dp"
+       android:layout_marginBottom="5dp"
+       />   
+ </LinearLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_marginTop="10dp"
+       >
+    <Button
+        android:id="@+id/suretoset_bt"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:text="确认修改"
+        android:textSize="18dp"
+        android:textColor="@color/white"
+        android:background="@drawable/bulebuttonbackground"
+        />   
+   </LinearLayout> 
+</LinearLayout>
+</LinearLayout>
