@@ -1,6 +1,7 @@
 package com.cx.sumicashersystem;
 
 import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,14 +39,11 @@ public class AllOrderTabFragment extends Fragment {
 	MonthRecordAdapter monthRecordeAdapter;
 	
 	PullToRefreshListView lv;
-	int start=0;//查询起点
-	int limit=0;//所查数据量
+	//int start=0;//查询起点
+	//int limit=0;//所查数据量
 	TextView allorderTv;
 	TextView fuelorderTv;
 	TextView cashorderTv;
-	
-	
-
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -133,8 +131,8 @@ public void getOrdersByHttp(){
 	int stationid=allOrderTabSharedPreferences.getInt("stationid", -1);
 	String useridStr=String.valueOf(userid);
 	String stationidStr=String.valueOf(stationid);
-	String startStr=String.valueOf(start);
-	String limitStr=String.valueOf(limit);
+	String startStr=String.valueOf(FragmentOrderList.static_start);
+	String limitStr=String.valueOf(FragmentOrderList.static_limit);
 	ordersparams.put("ordertype","0");//0全部，1加油，2购物
 	ordersparams.put("userid",useridStr);
 	ordersparams.put("stationid",stationidStr);
@@ -161,7 +159,7 @@ public void getOrdersByHttp(){
 				JSONArray data=response.getJSONArray("data");
 				
 				if(data.length()>0){
-					start=start+data.length();
+					FragmentOrderList.static_start+=data.length();
 					/*MonthRecord monthRecord1=new MonthRecord("本月","加油","200.00","4202016122222","2016-12-23 12:33");
 					monthRecordList.add(monthRecord1);*/
 					ArrayList<MonthRecord> tempList=new ArrayList<MonthRecord>();
@@ -253,6 +251,19 @@ public void getOrdersByHttp(){
 		
 		
 	});
+}
+
+
+
+@Override
+public void setUserVisibleHint(boolean isVisibleToUser) {
+	// TODO 自动生成的方法存根
+	super.setUserVisibleHint(isVisibleToUser);
+	if(isVisibleToUser){
+		if(monthRecordeAdapter!=null){
+			monthRecordeAdapter.notifyDataSetChanged();
+		}
+	}
 }
 
 @Override

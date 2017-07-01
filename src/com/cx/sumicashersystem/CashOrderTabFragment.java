@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 
 
+
 import com.cx.sumicashersystem.R;
 import com.cx.sumicashersystem.net.HttpParams;
 import com.cx.sumicashersystem.object.FragmentOrderList;
@@ -43,8 +44,8 @@ public class CashOrderTabFragment extends Fragment {
 	List<MonthRecord> CashmonthRecordList;
 	PullToRefreshListView cashlv;
 	MonthRecordAdapter CashmonthRecordeAdapter;
-	int start=0;//查询起点
-	int limit=0;//所查数据量
+	//int start=0;//查询起点
+	//int limit=0;//所查数据量
 	TextView allorderTv;
 	TextView fuelorderTv;
 	TextView cashorderTv;
@@ -157,11 +158,11 @@ public class CashOrderTabFragment extends Fragment {
 		int stationid=cashOrderTabSharedPreferences.getInt("stationid", -1);
 		String useridStr=String.valueOf(userid);
 		String stationidStr=String.valueOf(stationid);
-		String startStr=String.valueOf(start);
-		String limitStr=String.valueOf(limit);
+		String startStr=String.valueOf(FragmentOrderList.static_start);
+		String limitStr=String.valueOf(FragmentOrderList.static_limit);
 		ordersparams.put("userid",useridStr);
 		ordersparams.put("stationid",stationidStr);
-		ordersparams.put("ordertype","2");//0全部，1加油，2购物
+		ordersparams.put("ordertype","0");//0全部，1加油，2购物
 		ordersparams.put("start",startStr);
 		ordersparams.put("limit",limitStr);
 		getOrdersHttpClient.post(getOrderUrl, ordersparams, new JsonHttpResponseHandler(){
@@ -176,7 +177,7 @@ public class CashOrderTabFragment extends Fragment {
 					if(success){
 						JSONArray data=response.getJSONArray("data");
 						if(data.length()>0){
-							start=start+data.length();
+							FragmentOrderList.static_start+=data.length();
 							ArrayList<MonthRecord> tempList=new ArrayList<MonthRecord>();
 							for(int i=0;i<data.length();i++){
 								JSONObject mData=(JSONObject) data.get(i);
@@ -266,4 +267,27 @@ public class CashOrderTabFragment extends Fragment {
 		});
 	}
 
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+		// TODO 自动生成的方法存根
+		super.setUserVisibleHint(isVisibleToUser);
+		if(isVisibleToUser){
+			if(CashmonthRecordeAdapter!=null){
+				CashmonthRecordeAdapter.notifyDataSetChanged();
+				if(CashmonthRecordList!=null){
+					CashmonthRecordList.clear();
+					for(int i=0;i<FragmentOrderList.monthRecordList.size();i++){
+						MonthRecord mRecord=FragmentOrderList.monthRecordList.get(i);
+						String orderType=mRecord.getOrdertype();
+						if(orderType.equals("2")){
+							CashmonthRecordList.add(mRecord);
+						}
+					}
+				}
+
+			}
+			
+		}
+	}
+	
 }

@@ -8,7 +8,9 @@ import java.util.List;
 
 
 
+
 import com.cx.sumicashersystem.R;
+import com.cx.sumicashersystem.object.FragmentOrderList;
 import com.cx.sumicashersystem.object.MonthRecord;
 
 import android.os.Bundle;
@@ -177,11 +179,16 @@ private void initView(){
 			if(position==1){
 				fuelOrderTab.showList();
 			}
-			
-			
-	
 		}
 		
 	});
 }
+@Override
+protected void onDestroy() {
+	// TODO 自动生成的方法存根
+	FragmentOrderList.static_start=0;//我的订单返回时将查询起点重置
+	super.onDestroy();
+}
+
+
 }
