@@ -252,7 +252,14 @@ public class SuccessResultActivity extends Activity {
 					 SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
 						String timeStr=formatter.format(new Date());
 					  Log.d(TAG, "onFinish"+"currentTime"+timeStr);
+					  //v2.3版应更新:根据实付金额是否为不存在或0选择跳转不同失败页面,实付金额为0不可能再次扫描付款码
+					  SharedPreferences successResultSP=getSharedPreferences("cashiervalues",0);
+					String realPayStr=successResultSP.getString("realPayStr", "-1");
 					Intent toFail=new Intent(SuccessResultActivity.this,FailResultActivity.class);
+					if(realPayStr==null||realPayStr.equals("-1")||realPayStr.equals("0.0")){
+						toFail=new Intent(SuccessResultActivity.this,FailResultActivitySec.class);
+					}
+					
 					startActivity(toFail);
 					SuccessResultActivity.this.finish();
 				}

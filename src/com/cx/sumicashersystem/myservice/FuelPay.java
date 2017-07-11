@@ -2,6 +2,8 @@ package com.cx.sumicashersystem.myservice;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -11,6 +13,7 @@ import org.json.JSONObject;
 
 import com.cx.sumicashersystem.net.HttpParams;
 import com.cx.sumicashersystem.utils.GenerateOrdeNO;
+import com.cx.sumicashersystem.utils.TimeStampToTime;
 import com.cx.sumicashersystem.utils.ToAccuracy2;
 import com.cx.sumicashersystem.R;
 import com.loopj.android.http.AsyncHttpClient;
@@ -23,6 +26,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
@@ -66,8 +70,23 @@ public class FuelPay extends Activity {
 	SharedPreferences fuelPaySharedPreferences;
 	String orderno="";
 	ProgressDialog pd;//等待条
+	ProgressDialog getOrderPd;//getOrderDetail
+	ProgressDialog payingPd;
 	SharedPreferences FuelSP;
-
+	CountDownTimer cdtimer=null;
+	 int count=0;
+	 String orderdate="";
+	 String orderdateShow="";
+	 String stationidStr="";
+	 String stationName="";
+	 String amount="";
+	 String points="";
+	 String pointsAmount="";
+	 String voucheramount="";
+	 String payamount="";
+	 String payment="";
+	 private static final int PAYSUCCESS=3;
+	 
 	private Handler dealerHandler = new Handler() {
 
 		@Override
@@ -85,6 +104,28 @@ public class FuelPay extends Activity {
 			case 2:
 				checkPayTv.setClickable(true);
 				
+				break;
+				
+			case PAYSUCCESS:
+				if(checkPayTv!=null){
+					checkPayTv.setClickable(true);
+				}
+				if(payingPd!=null){
+					payingPd.dismiss();
+					payingPd=null;
+				}
+				//cdtimer
+				if(cdtimer!=null){
+					cdtimer.cancel();
+					cdtimer=null;
+				}
+				//到支付成功
+				Bundle bundle2=new Bundle();
+				bundle2.putString("activitytype", "1");
+				bundle2.putString("orderno", orderno);
+				Intent toSuccessPaying=new Intent(FuelPay.this,SuccessResultActivity.class);
+				toSuccessPaying.putExtras(bundle2);
+				startActivity(toSuccessPaying);
 				break;
 			default:
 				break;
@@ -314,7 +355,10 @@ public class FuelPay extends Activity {
 				// TODO 自动生成的方法存根
 				if(inputMoneyStr.endsWith(".")){
 					Toast.makeText(FuelPay.this, "请检查实付金额是否错误", Toast.LENGTH_SHORT).show();
-				}else{
+				}else if(inputMoneyStr.length()<=0){
+					Toast.makeText(FuelPay.this, "请输入金额", Toast.LENGTH_SHORT).show();
+				}
+				else{
 					if (realPayD > 0) {
 						SharedPreferences.Editor repayEditor=fuelPaySharedPreferences.edit();
 						Bundle bundle = new Bundle();
@@ -347,6 +391,15 @@ public class FuelPay extends Activity {
 						startActivity(toScannPayCodeIntent);
 						//FuelPay.this.finish();
 					} else if(realPayD==0){//实付金额为0调用submitOrderByHttp
+						checkPayTv.setClickable(false);//防止重复点击(请求时也加遮罩)
+						//v2.3版更新部分：realPayD==0时也将以下字段存入
+						SharedPreferences.Editor repayEditor=fuelPaySharedPreferences.edit();
+						repayEditor.putString("amountStr", inputMoneyStr);
+						repayEditor.putString("pointsStr", pointsStr);
+						repayEditor.putString("pointsamountStr",pointAmountStr);
+						repayEditor.putString("realPayStr", realPayStr);
+						repayEditor.commit();	
+						
 						long TimeStamp=System.currentTimeMillis()/1000;//获取10位时间戳
 						String timeStampStr=String.valueOf(TimeStamp);
 						orderno="JF"+timeStampStr;
@@ -554,6 +607,7 @@ public class FuelPay extends Activity {
 	
 	public void submitOrderByHttp(String payqrcode){
 		//Toast.makeText(getApplicationContext(), "submitOrder", Toast.LENGTH_SHORT).show();
+		pd=ProgressDialog.show(FuelPay.this, "请稍候", "提交中...");
 		AsyncHttpClient getCustomerClient=new AsyncHttpClient();
 		getCustomerClient.addHeader("Charset", HttpParams.DEFAULT_CHARSET);
 		getCustomerClient.setTimeout(HttpParams.DEFAULT_TIME_OUT);
@@ -562,10 +616,13 @@ public class FuelPay extends Activity {
 		String mUrl=FuelSP.getString("mUrl", HttpParams.DEFAULT_URL);
 		String mPort=FuelSP.getString("mPort", HttpParams.DEFAULT_PORT);
 		String submiturl=mUrl+":"+mPort+"/"+HttpParams.submitOrderUrl;
+		//submiturl="http://192.168.1.17:9005/api/ManageMentSystem/Test";//for timeoutTest
+		
+		
 		//String submiturl=mUrl+"/"+HttpParams.submitOrderUrl;
 		Log.d("fUrl", submiturl);
 		RequestParams submitparams=new RequestParams();
-		Log.d("fUrl", submiturl);
+		//Log.d("fUrl", submiturl);
 		String ordertyeStr=FuelSP.getString("serivceType", "1");
 		String ordertype=ordertyeStr;
 		int stationId=FuelSP.getInt("stationid", -1);
@@ -600,14 +657,19 @@ public class FuelPay extends Activity {
 		Log.d("MipcaActivity", "realPay"+realPayStr+"/"+"amount"+inputMoneyStr+"/"+"points"+pointsStr+"/"+"pointsamount"+pointAmountStr);
 		submitparams.put("voucher", voucher);
 		submitparams.put("voucheramount", voucheramount);
-		submitparams.put("payamount", payamount);
+		submitparams.put("payamount", payamount);//realPay
 		submitparams.put("qrcode", payqrcode);//fortest
+		
+	
 		getCustomerClient.post(submiturl,submitparams,new JsonHttpResponseHandler(){
  
 			@Override
 			public void onSuccess(int statusCode, JSONObject response) {
 				// TODO 自动生成的方法存�?
 				super.onSuccess(statusCode, response);
+				if(checkPayTv!=null){
+					checkPayTv.setClickable(true);
+				}
 				Log.d(TAG, "onSuccess");
 				if(pd!=null){
 					pd.dismiss();
@@ -637,6 +699,7 @@ public class FuelPay extends Activity {
 							Intent toSuccessPaying=new Intent(FuelPay.this,SuccessResultActivity.class);
 							toSuccessPaying.putExtras(bundle);
 							startActivity(toSuccessPaying);
+
 							FuelPay.mFuelPay.finish();
 							finish();
 							//Toast.makeText(MipcaActivityCapture.this, "userpaying", Toast.LENGTH_SHORT).show();
@@ -685,22 +748,158 @@ public class FuelPay extends Activity {
 			public void onFailure(Throwable e, JSONObject errorResponse) {
 				// TODO 自动生成的方法存�?
 				super.onFailure(e, errorResponse);
+/*				if(checkPayTv!=null){
+					checkPayTv.setClickable(true);
+				}*/
 				Log.d("loginActivity", "qrscanonFailure");
 				if(pd!=null){
 					pd.dismiss();
 				}
+				
+				if(checkPayTv!=null){
+					checkPayTv.setClickable(true);
+				}
+				if(payingPd!=null){
+					payingPd.dismiss();
+					payingPd=null;
+				}
+				//cdtimer
+				if(cdtimer!=null){
+					cdtimer.cancel();
+					cdtimer=null;
+				}
+				//到支付成功查询步骤
+				Bundle bundle2=new Bundle();
+				bundle2.putString("activitytype", "1");
+				bundle2.putString("orderno", orderno);
+				Intent toSuccessPaying=new Intent(FuelPay.this,SuccessResultActivity.class);
+				toSuccessPaying.putExtras(bundle2);
+				startActivity(toSuccessPaying);
+				FuelPay.this.finish();
+				
+/*				//超时时开启查询
+				payingPd=ProgressDialog.show(FuelPay.this, "查询中", "请等待...");
+				cdtimer=new CountDownTimer(50*1000,5*1000){
 
+					@Override
+					public void onTick(long millisUntilFinished) {
+						// TODO 自动生成的方法存根
+						SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
+						String timeStr=formatter.format(new Date());
+						Log.d("FuelPay", "currentTime"+timeStr+"/"+"count"+count);
+						
+						if(count>0){
+							//Log.d(TAG, "currentTime"+(System.currentTimeMillis()-currentTime)+"/"+"count"+count);
+						//	System.out.println("currentTime"+(System.currentTimeMillis()-currentTime)+"/"+"count"+count);
+						//	System.out.println("1");
+							//currentTime=System.currentTimeMillis();
+							Log.d(TAG, "getOrderFinishByHttp");
+							getOrderFinishByHttp(orderno);
+						}
+						count++;
+
+					}
+
+					@Override
+					public void onFinish() {
+						// TODO 自动生成的方法存根
+						 SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
+							String timeStr=formatter.format(new Date());
+						  Log.d(TAG, "onFinish"+"currentTime"+timeStr);
+						Intent toFail=new Intent(SuccessResultActivity.this,FailResultActivity.class);
+						startActivity(toFail);
+						SuccessResultActivity.this.finish();
+					if(checkPayTv!=null){
+						checkPayTv.setClickable(true);
+					}
+					if(payingPd!=null){
+						payingPd.dismiss();
+						payingPd=null;
+					}
+					Toast.makeText(FuelPay.this, "请求失败", Toast.LENGTH_SHORT).show();
+					}
+					
+				};
+				 cdtimer.start();*/
 			}
 			
 			@Override
 			public void onFailure(Throwable e, String errorResponse) {
 				// TODO 自动生成的方法存�?
 				super.onFailure(e, errorResponse);
+/*				if(checkPayTv!=null){
+					checkPayTv.setClickable(true);
+				}*/
 				Log.d("loginActivity", "qrscanonFailure");
 				if(pd!=null){
 					pd.dismiss();
 				}
+				
+				if(checkPayTv!=null){
+					checkPayTv.setClickable(true);
+				}
+				if(payingPd!=null){
+					payingPd.dismiss();
+					payingPd=null;
+				}
+				//cdtimer
+				if(cdtimer!=null){
+					cdtimer.cancel();
+					cdtimer=null;
+				}
+				//到支付成功查询步骤
+				Bundle bundle2=new Bundle();
+				bundle2.putString("activitytype", "1");
+				bundle2.putString("orderno", orderno);
+				Intent toSuccessPaying=new Intent(FuelPay.this,SuccessResultActivity.class);
+				toSuccessPaying.putExtras(bundle2);
+				startActivity(toSuccessPaying);
+				FuelPay.this.finish();
+/*				
+				//超时时开启查询
+				payingPd=ProgressDialog.show(FuelPay.this, "查询中", "请等待...");
+				cdtimer=new CountDownTimer(50*1000,5*1000){
 
+					@Override
+					public void onTick(long millisUntilFinished) {
+						// TODO 自动生成的方法存根
+						SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
+						String timeStr=formatter.format(new Date());
+						Log.d("FuelPay", "currentTime"+timeStr+"/"+"count"+count);
+						
+						if(count>0){
+							//Log.d(TAG, "currentTime"+(System.currentTimeMillis()-currentTime)+"/"+"count"+count);
+						//	System.out.println("currentTime"+(System.currentTimeMillis()-currentTime)+"/"+"count"+count);
+						//	System.out.println("1");
+							//currentTime=System.currentTimeMillis();
+							Log.d(TAG, "getOrderFinishByHttp");
+							getOrderFinishByHttp(orderno);
+						}
+						count++;
+
+					}
+
+					@Override
+					public void onFinish() {
+						// TODO 自动生成的方法存根
+						 SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
+							String timeStr=formatter.format(new Date());
+						  Log.d(TAG, "onFinish"+"currentTime"+timeStr);
+						Intent toFail=new Intent(SuccessResultActivity.this,FailResultActivity.class);
+						startActivity(toFail);
+						SuccessResultActivity.this.finish();
+					if(checkPayTv!=null){
+						checkPayTv.setClickable(true);
+					}
+					if(payingPd!=null){
+						payingPd.dismiss();
+						payingPd=null;
+					}
+					Toast.makeText(FuelPay.this, "请求失败", Toast.LENGTH_SHORT).show();
+					}
+					
+				};
+				 cdtimer.start();*/
 			}
 			
 			
@@ -709,7 +908,81 @@ public class FuelPay extends Activity {
 		
 	}
 	
+	public void getOrderFinishByHttp(String morderno){
+		AsyncHttpClient asyncHttpClient=new AsyncHttpClient();
+		asyncHttpClient.addHeader("Charset", HttpParams.DEFAULT_CHARSET);
+		asyncHttpClient.setTimeout(HttpParams.DEFAULT_TIME_OUT);
+		FuelSP=getSharedPreferences("cashiervalues", 0);
+		String mUrl=FuelSP.getString("mUrl", HttpParams.DEFAULT_URL);
+		String mPort=FuelSP.getString("mPort", HttpParams.DEFAULT_PORT);
+		String orderFinishUrl=mUrl+":"+mPort+"/"+HttpParams.getOrderFinish;
+		//orderFinishUrl="http://192.168.1.17:9005/api/ManageMentSystem/Query";//fortest
+		RequestParams params=new RequestParams();
+		params.put("orderno", morderno);
+		asyncHttpClient.post(orderFinishUrl, params, new JsonHttpResponseHandler(){
+
+			@Override
+			public void onSuccess(JSONObject response) {
+				// TODO 自动生成的方法存根
+				super.onSuccess(response);
+				boolean success=false;
+				try{
+					success=response.getBoolean("success");
+					if(success){
+						JSONArray data=response.getJSONArray("data");
+						if(data==null||data.length()<=0){
+							
+						}else if(data!=null&&data.length()>0){
+							//mHandler
+							JSONObject data0=(JSONObject) data.get(0);
+							orderno=data0.getString("orderno");
+							orderdate=data0.getString("orderdate");
+							orderdateShow=TimeStampToTime.getTime(orderdate);
+							int stationidint=data0.getInt("stationid");
+							stationidStr=String.valueOf(stationidint);
+							stationName=FuelSP.getString("stationName", "");
+							double mamount=data0.getDouble("amount");
+							amount=String.valueOf(mamount);
+							double mpoints=data0.getDouble("points");
+							points=String.valueOf(mpoints);
+							double mpointsamount=data0.getDouble("pointsamount");
+							pointsAmount=String.valueOf(mpointsamount);
+							double mvouchersamount=data0.getDouble("voucheramount");
+							voucheramount=String.valueOf(mvouchersamount);
+	
+							double mPayamount=data0.getDouble("payamount");
+							payamount=String.valueOf(mPayamount);
+							payment=data0.getString("payment");
+							
+							
+							Message message=Message.obtain();
+							message.what=PAYSUCCESS;
+							dealerHandler.sendMessage(message);
+						}
+
+					}else{
+						Toast.makeText(FuelPay.this, "查询失败", Toast.LENGTH_SHORT).show();
+					}
+					
+				}catch(JSONException e){
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable e, String errorResponse) {
+				// TODO 自动生成的方法存根
+				super.onFailure(e, errorResponse);
+			}
+
+			
+			
+		});
+	}
+	
+	
 	public void getOrderDetail(String orderno){
+		getOrderPd=ProgressDialog.show(FuelPay.this, "查询中", "请稍候...");
 		Log.d(TAG, "getOrderDetail");
 		AsyncHttpClient getOrderHttpClient=new AsyncHttpClient();
 		getOrderHttpClient.addHeader("Charset", HttpParams.DEFAULT_CHARSET);
@@ -727,6 +1000,11 @@ public class FuelPay extends Activity {
 			public void onSuccess(int statusCode, JSONObject response) {
 				// TODO 自动生成的方法存�?
 				super.onSuccess(statusCode, response);
+				if(getOrderPd!=null){
+					getOrderPd.dismiss();
+					getOrderPd=null;
+				}
+				
 				boolean success=false;
 					try{
 						success=response.getBoolean("success");
@@ -798,12 +1076,19 @@ public class FuelPay extends Activity {
 					}
 
 			}
+			
 
 			@Override
 			public void onFailure(Throwable e, JSONObject errorResponse) {
 				// TODO 自动生成的方法存�?
 				Log.e(TAG, "SPC onFailure json");
 				super.onFailure(e, errorResponse);
+				
+				if(getOrderPd!=null){
+					getOrderPd.dismiss();
+					getOrderPd=null;
+				}
+				
 				if(pd!=null){
 					pd.dismiss();
 					pd=null;
@@ -816,7 +1101,10 @@ public class FuelPay extends Activity {
 				// TODO 自动生成的方法存�?
 				Log.e(TAG, "SPC onFailure string");
 				super.onFailure(e, errorResponse);
-				
+				if(getOrderPd!=null){
+					getOrderPd.dismiss();
+					getOrderPd=null;
+				}
 				if(pd!=null){
 					pd.dismiss();
 					pd=null;

@@ -117,12 +117,12 @@ public class MipcaActivityCapture extends Activity implements Callback {
 			pointsamountStr=MipSharedPreferences.getString("pointsamountStr", "-1");
 			realPayStr=MipSharedPreferences.getString("realPayStr", "-1");
 			//4个value置为0
-			SharedPreferences.Editor clearEditor=MipSharedPreferences.edit();
+			/*SharedPreferences.Editor clearEditor=MipSharedPreferences.edit();
 			clearEditor.putString("amountStr", "0");
 			clearEditor.putString("pointsStr", "0");
 			clearEditor.putString("pointsamountStr", "0");
 			clearEditor.putString("realPayStr", "0");
-			clearEditor.commit();
+			clearEditor.commit();*/
 		}
 		//ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
 		CameraManager.init(getApplication());
